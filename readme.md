@@ -11,10 +11,10 @@ When used, this tool will:
 - the structure of your submod remains the same
 
 ### Usage
-Help is available via `python submod_converter.py -h`
+Help is available via `python mas_submod_converter.py -h`
 
 Basic example:
-- `python submod_converter.py "some/submod/directory" "submod_header.rpy"`
+- `python mas_submod_converter.py "some/submod/directory" "submod_header.rpy"`
 
 Flags:
 - `-d` - dry run - it's recommended to run the command with this flag first, verify the result is correct, then run the command again without the flag
