@@ -103,7 +103,8 @@ def _find_defition_bounds(header_file: typing.IO, *, quiet: bool = False):
                     is_in_init_py_block = False
                     break
 
-    print("Done")
+    if not quiet:
+        print("Done")
 
     return (start_line, end_line)
 
@@ -255,7 +256,8 @@ def _convert_scripts(
     quiet: bool = False,
     dry_run: bool = False
 ) -> list[str]:
-    print("\nConverting scripts")
+    if not quiet:
+        print("\nConverting scripts")
     modules = []
 
     for rpy_fp in glob.iglob("**/*.rpy*", root_dir=rpy_dir, recursive=True):
@@ -287,7 +289,8 @@ def _convert_scripts(
         if not dry_run:
             os.rename(rpy_fp_full, new_fp)
 
-    print("Done")
+    if not quiet:
+        print("Done")
     return modules
 
 
