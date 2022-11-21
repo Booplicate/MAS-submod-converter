@@ -25,7 +25,7 @@ READ_CHUNK_SIZE = 2 * 1024**2
 PATTERN_INIT_PY = re.compile(r"(init\s+-\d{3}\s+python(?:\s+in\s+\w+)?\s*:\n)")
 PATTERN_INDENT = re.compile(r"( +)")
 PATTERN_TEXT = re.compile(r"\s*(\S+)")
-PATTERN_SUBMOD_START = re.compile(r"\s*((?:(?:store.)?mas_submod_utils.)?Submod\()")
+PATTERN_SUBMOD_START = re.compile(r"((?:(?:store.)?mas_submod_utils.)?Submod\()")
 
 
 def _find_defition_bounds(header_file: typing.IO, *, quiet: bool = False):
@@ -81,7 +81,7 @@ def _find_defition_bounds(header_file: typing.IO, *, quiet: bool = False):
             # Still within the block
             # Look for submod definition
             if not is_in_submod_block:
-                if re.match(PATTERN_SUBMOD_START, line) is not None:
+                if re.search(PATTERN_SUBMOD_START, line) is not None:
                     if not quiet:
                         print(f"Entering submod block: {num}")
                     is_in_submod_block = True
@@ -362,6 +362,8 @@ def main():
         quiet=quiet,
         dry_run=dry_run
     )
+    if tree is None:
+        return
     modules = _convert_scripts(
         (out_dir if not dry_run else args.submod_dir),
         quiet=quiet,
